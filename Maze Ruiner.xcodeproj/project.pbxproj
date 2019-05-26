@@ -15,6 +15,9 @@
 		CC0FCE4822927504005CF6E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC0FCE4622927504005CF6E3 /* Main.storyboard */; };
 		CC0FCE4A22927505005CF6E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC0FCE4922927505005CF6E3 /* Assets.xcassets */; };
 		CC0FCE4D22927505005CF6E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC0FCE4B22927505005CF6E3 /* LaunchScreen.storyboard */; };
+		CCE19CFB22980A9C004E06C9 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE19CFA22980A9C004E06C9 /* GameOverScene.swift */; };
+		CCE19CFD22980B84004E06C9 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCE19CFC22980B84004E06C9 /* GameOverScene.sks */; };
+		CCE19CFF22981568004E06C9 /* FTButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE19CFE22981568004E06C9 /* FTButtonNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		CC0FCE4922927505005CF6E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC0FCE4C22927505005CF6E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC0FCE4E22927505005CF6E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCE19CFA22980A9C004E06C9 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		CCE19CFC22980B84004E06C9 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
+		CCE19CFE22981568004E06C9 /* FTButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTButtonNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +66,11 @@
 		CC0FCE3B22927504005CF6E3 /* Maze Ruiner */ = {
 			isa = PBXGroup;
 			children = (
+				CCE19D02229AD751004E06C9 /* GameScene */,
 				CC0FCE3C22927504005CF6E3 /* AppDelegate.swift */,
-				CC0FCE3E22927504005CF6E3 /* GameScene.sks */,
-				CC0FCE4022927504005CF6E3 /* Actions.sks */,
+				CCE19CFE22981568004E06C9 /* FTButtonNode.swift */,
 				CC0FCE4222927504005CF6E3 /* GameScene.swift */,
+				CCE19CFA22980A9C004E06C9 /* GameOverScene.swift */,
 				CC0FCE4422927504005CF6E3 /* GameViewController.swift */,
 				CC0FCE4622927504005CF6E3 /* Main.storyboard */,
 				CC0FCE4922927505005CF6E3 /* Assets.xcassets */,
@@ -71,6 +78,16 @@
 				CC0FCE4E22927505005CF6E3 /* Info.plist */,
 			);
 			path = "Maze Ruiner";
+			sourceTree = "<group>";
+		};
+		CCE19D02229AD751004E06C9 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				CC0FCE3E22927504005CF6E3 /* GameScene.sks */,
+				CCE19CFC22980B84004E06C9 /* GameOverScene.sks */,
+				CC0FCE4022927504005CF6E3 /* Actions.sks */,
+			);
+			path = GameScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,6 +152,7 @@
 				CC0FCE3F22927504005CF6E3 /* GameScene.sks in Resources */,
 				CC0FCE4A22927505005CF6E3 /* Assets.xcassets in Resources */,
 				CC0FCE4D22927505005CF6E3 /* LaunchScreen.storyboard in Resources */,
+				CCE19CFD22980B84004E06C9 /* GameOverScene.sks in Resources */,
 				CC0FCE4122927504005CF6E3 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +166,8 @@
 			files = (
 				CC0FCE4322927504005CF6E3 /* GameScene.swift in Sources */,
 				CC0FCE4522927504005CF6E3 /* GameViewController.swift in Sources */,
+				CCE19CFB22980A9C004E06C9 /* GameOverScene.swift in Sources */,
+				CCE19CFF22981568004E06C9 /* FTButtonNode.swift in Sources */,
 				CC0FCE3D22927504005CF6E3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

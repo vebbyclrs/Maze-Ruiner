@@ -10,6 +10,15 @@ import SpriteKit
 import GameplayKit
 import CoreMotion
 
+struct PhysicsCategory {
+    static let none      : UInt32 = 0
+    static let all       : UInt32 = UInt32.max
+    static let ball      : UInt32 = 0b1
+    static let endNode   : UInt32 = 0b10
+    static let thorn     : UInt32 = 0b11
+    static let wall      : UInt32 = 0b100
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let manager = CMMotionManager()
@@ -25,7 +34,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.texture = SKTexture(image: UIImage(named: "Ball")!)
         endNode = self.childNode(withName: "endNode") as! SKSpriteNode
         
-        
         manager.startAccelerometerUpdates()
         manager.accelerometerUpdateInterval = 0.1
         manager.startAccelerometerUpdates(to: OperationQueue.main){
@@ -36,38 +44,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        let bodyA = contact.bodyA
-        let bodyB = contact.bodyB
+        let bodyA : SKPhysicsBody
+        let bodyB : SKPhysicsBody
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            bodyA = contact.bodyA
+            bodyB = contact.bodyB
+        }
+        else {
+            bodyA = contact.bodyB
+            bodyB = contact.bodyA
+        }
         
-        if bodyA.categoryBitMask == 1 && bodyB.categoryBitMask == 2 || bodyA.categoryBitMask == 2 && bodyB.categoryBitMask == 1 {
-            var a = Int(arc4random_uniform(9) + 1)
-            if col == a && a != 9{
-                a = a + 1
-            } else if col == a && a == 9 {
-                a = 1
-            }
-            col = a
-            if a == 1 {
-                endNode.color = UIColor.white
-            } else if a == 2 {
-                endNode.color = UIColor.yellow
-            } else if a == 3 {
-                endNode.color = UIColor.purple
-            } else if a == 4 {
-                endNode.color = UIColor.orange
-            } else if a == 5 {
-                endNode.color = UIColor.magenta
-            } else if a == 6 {
-                endNode.color = UIColor.green
-            } else if a == 7 {
-                endNode.color = UIColor.cyan
-            } else if a == 8 {
-                endNode.color = UIColor.brown
-            } else {
-                endNode.color = UIColor.blue
-            }
+        if bodyA.categoryBitMask == 1 && bodyB.categoryBitMask == 2 {//ball and flag
             
         }
+        if bodyA.categoryBitMask == 1 && bodyB.categoryBitMask == 4 {
+            
+        }
+        
+    }
+    
+    func ballTouchFlag () {
         
     }
     
