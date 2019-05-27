@@ -28,11 +28,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
-        
+        print ("self:\(self)")
         player = self.childNode(withName: "player") as! SKSpriteNode
         player.texture = SKTexture(image: UIImage(named: "Ball")!)
         endNode = self.childNode(withName: "endNode") as! SKSpriteNode
-        resetPLayer()
+        
         
         manager.startAccelerometerUpdates()
         manager.accelerometerUpdateInterval = 0.1
@@ -61,9 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if bodyA.categoryBitMask == 1 && bodyB.categoryBitMask == 3{ //ball and spikes
             ballTouchedSpikes()
         }
-//        if self.childNode(withName: <#T##String#>)
     }
-    
     
     func ballTouchedSpikes () {
         print ("you lose")
@@ -82,12 +80,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         replayButton.position = popUpMessage.position ; replayButton.zPosition = 2
         replayButton.name = "replayButton"
         addChild(replayButton)
-        
-//        if replayButton.isSelected {
-//            replayTheGame()
-//        }
+        replayButton.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(replayTheGame))
+    }
+    @objc func replayTheGame() {
+        let newScene = SKScene(fileNamed: "GameScene")
+        let transition = SKTransition.fade(withDuration: 1.0)
+        self.childNode(withName: "popUpMessage")?.removeFromParent()
+        self.childNode(withName: "replayButton")?.removeFromParent()
+        self.view?.presentScene(newScene!, transition: transition)
         
     }
+
     
     func resetPLayer() {
         player.position = CGPoint(x: 387, y: -864)
@@ -115,13 +118,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(trophy)
     }
     
-//    func replayTheGame() {
-//        let newScene = GameScene(size: self.size)
-//        let transition = SKTransition.flipVertical(withDuration: 0.3)
-//        self.childNode(withName: "popUpMessage")?.removeFromParent()
-//        self.childNode(withName: "replayButton")?.removeFromParent()
-//        self.view?.presentScene(newScene, transition: transition)
-//    }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
