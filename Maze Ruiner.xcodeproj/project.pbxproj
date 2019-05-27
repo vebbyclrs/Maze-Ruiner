@@ -66,6 +66,7 @@
 		CC0FCE3B22927504005CF6E3 /* Maze Ruiner */ = {
 			isa = PBXGroup;
 			children = (
+				CC0FCE4922927505005CF6E3 /* Assets.xcassets */,
 				CCE19D02229AD751004E06C9 /* GameScene */,
 				CC0FCE3C22927504005CF6E3 /* AppDelegate.swift */,
 				CCE19CFE22981568004E06C9 /* FTButtonNode.swift */,
@@ -73,7 +74,6 @@
 				CCE19CFA22980A9C004E06C9 /* GameOverScene.swift */,
 				CC0FCE4422927504005CF6E3 /* GameViewController.swift */,
 				CC0FCE4622927504005CF6E3 /* Main.storyboard */,
-				CC0FCE4922927505005CF6E3 /* Assets.xcassets */,
 				CC0FCE4B22927505005CF6E3 /* LaunchScreen.storyboard */,
 				CC0FCE4E22927505005CF6E3 /* Info.plist */,
 			);

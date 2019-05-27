@@ -13,7 +13,7 @@ import CoreMotion
 struct PhysicsCategory {
     static let none      : UInt32 = 0
     static let all       : UInt32 = UInt32.max
-    static let ball      : UInt32 = 0b1
+    static let ball      : UInt32 = 0b01
     static let endNode   : UInt32 = 0b10
     static let thorn     : UInt32 = 0b11
     static let wall      : UInt32 = 0b100
@@ -27,12 +27,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var col: Int = 1
     
     override func didMove(to view: SKView) {
-        
         self.physicsWorld.contactDelegate = self
         
         player = self.childNode(withName: "player") as! SKSpriteNode
         player.texture = SKTexture(image: UIImage(named: "Ball")!)
         endNode = self.childNode(withName: "endNode") as! SKSpriteNode
+        resetPLayer()
         
         manager.startAccelerometerUpdates()
         manager.accelerometerUpdateInterval = 0.1
@@ -46,6 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let bodyA : SKPhysicsBody
         let bodyB : SKPhysicsBody
+        
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             bodyA = contact.bodyA
             bodyB = contact.bodyB
@@ -56,17 +57,71 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if bodyA.categoryBitMask == 1 && bodyB.categoryBitMask == 2 {//ball and flag
-            
+            ballTouchedFlag()
+        } else if bodyA.categoryBitMask == 1 && bodyB.categoryBitMask == 3{ //ball and spikes
+            ballTouchedSpikes()
         }
-        if bodyA.categoryBitMask == 1 && bodyB.categoryBitMask == 4 {
-            
-        }
+//        if self.childNode(withName: <#T##String#>)
+    }
+    
+    
+    func ballTouchedSpikes () {
+        print ("you lose")
+        childNode(withName: "player")?.physicsBody?.affectedByGravity = false
+        childNode(withName: "player")?.physicsBody?.isDynamic = false
+        let popUpMessage = SKSpriteNode(color: UIColor.black, size: CGSize(width: 330, height: 200))
+        popUpMessage.name = "popUpMessage"
+        popUpMessage.alpha = 0.8
+        popUpMessage.drawBorder(color: UIColor.red, width: 3)
+        popUpMessage.position = CGPoint(x: self.size.width * 0.5, y: -(self.size.height * 0.5)) ;popUpMessage.zPosition = CGFloat(1)
+        addChild(popUpMessage)
+        
+        let buttonTexture = SKTexture(imageNamed: "ButtonReplay")
+        let buttonPressedTexture = SKTexture(imageNamed: "ButtonReplay On Klick")
+        let replayButton = FTButtonNode(normalTexture: buttonTexture, selectedTexture: buttonPressedTexture, disabledTexture: buttonTexture)
+        replayButton.position = popUpMessage.position ; replayButton.zPosition = 2
+        replayButton.name = "replayButton"
+        addChild(replayButton)
+        
+//        if replayButton.isSelected {
+//            replayTheGame()
+//        }
         
     }
     
-    func ballTouchFlag () {
-        
+    func resetPLayer() {
+        player.position = CGPoint(x: 387, y: -864)
+        player.zPosition = 0
+        player.physicsBody?.isDynamic = true
+        player.physicsBody?.affectedByGravity = true
     }
+    
+    func ballTouchedFlag() {
+        print ("you won")
+        childNode(withName: "player")?.physicsBody?.affectedByGravity = false
+        childNode(withName: "player")?.physicsBody?.isDynamic = false
+        
+        let popUpMessage = SKSpriteNode(color: UIColor.white, size: CGSize(width: 330, height: 200))
+        popUpMessage.name = "popUpMessage"
+        popUpMessage.alpha = 0.95
+        popUpMessage.drawBorder(color: UIColor.red, width: 3)
+        popUpMessage.position = CGPoint(x: self.size.width * 0.5, y: -(self.size.height * 0.5))
+        popUpMessage.zPosition = CGFloat(1)
+        addChild(popUpMessage)
+        
+        let trophy = SKSpriteNode(imageNamed: "Trophy")
+        trophy.zPosition = 2
+        trophy.position = popUpMessage.position
+        addChild(trophy)
+    }
+    
+//    func replayTheGame() {
+//        let newScene = GameScene(size: self.size)
+//        let transition = SKTransition.flipVertical(withDuration: 0.3)
+//        self.childNode(withName: "popUpMessage")?.removeFromParent()
+//        self.childNode(withName: "replayButton")?.removeFromParent()
+//        self.view?.presentScene(newScene, transition: transition)
+//    }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
